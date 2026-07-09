@@ -4,7 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
-group = 'com.proteinj'
+group = 'com.pawwalk'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -35,6 +35,14 @@ dependencies {
 
 	// Swagger UI (SpringDoc OpenAPI) — 컨트롤러 어노테이션 기반 자동 문서화
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.5'
+
+	// PawWalk 전용: PostGIS 공간 쿼리 (DB_SCHEMA.sql의 geography(Point,4326) 매핑)
+	implementation 'org.hibernate.orm:hibernate-spatial'
+	implementation 'org.locationtech.jts:jts-core:1.19.0'
+
+	// PawWalk 전용: Flyway 마이그레이션 (DB_SCHEMA.sql -> V1__init.sql)
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.flywaydb:flyway-database-postgresql'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'

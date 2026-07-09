@@ -1,19 +1,25 @@
 spring:
   application:
-    name: boilerplate
+    name: pawwalk-server
 
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/boilerplate}
+    # Supabase Postgres 연결 문자열로 교체 필요 (Supabase 대시보드 > Settings > Database)
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/pawwalk}
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:postgres}
 
   jpa:
     hibernate:
-      ddl-auto: ${JPA_DDL_AUTO:update} # 로컬 테스트 편의용. 실제 프로젝트(PawWalk 등)에서는 Flyway로 전환 권장
+      ddl-auto: validate # 스키마는 Flyway가 관리, Hibernate는 엔티티-테이블 일치 여부만 검증
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+        dialect: org.hibernate.spatial.dialect.postgis.PostgisPG10Dialect
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
 
   data:
     redis:
