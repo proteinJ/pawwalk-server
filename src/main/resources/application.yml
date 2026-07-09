@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: boilerplate
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/boilerplate}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+
+  jpa:
+    hibernate:
+      ddl-auto: ${JPA_DDL_AUTO:update} # 로컬 테스트 편의용. 실제 프로젝트(PawWalk 등)에서는 Flyway로 전환 권장
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+jwt:
+  secret: ${JWT_SECRET:change-this-to-a-long-random-secret-in-production-env-var}
+  access-token-validity-in-milliseconds: ${JWT_AT_VALIDITY:3600000}      # 1시간
+  refresh-token-validity-in-milliseconds: ${JWT_RT_VALIDITY:604800000}  # 7일
+
+server:
+  port: ${SERVER_PORT:8080}
